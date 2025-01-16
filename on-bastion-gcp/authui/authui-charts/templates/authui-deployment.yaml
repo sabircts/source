@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authui-deployment
+  namespace: flowsource
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authui
+  template:
+    metadata:
+      labels:
+        app: authui
+    spec:
+      containers:
+      - image: gcr.io/gcip-iap/authui
+        imagePullPolicy: Always
+        name: authui
+        env:
+        - name: DEBUG_CONSOLE
+          value: "true"
+        envFrom:
+          - configMapRef:
+              name: gcip-iap-authui-configmap
+        ports:
+        - containerPort: 8080
