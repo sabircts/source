@@ -4,7 +4,6 @@ global:
   configMapName: gcip-iap-authui-configmap
 
   authuiConfig:
-    AUTH_DOMAIN: "auth.dev.gcp.flowsource.cognizantproducts.com"
     DISPLAY_MODE: "optionFirst"
     SELECT_TENANT_UI_TITLE: "Flowsource Auth UI"
     LOGO: ""
@@ -37,5 +36,7 @@ global:
       secretObjects:
         - keyVaultObjectName: AUTHUI_FIREBASE_API_KEY
           secretName: AUTHUI_FIREBASE_API_KEY
+        - keyVaultObjectName: AUTH_DOMAIN
+          secretName: AUTH_DOMAIN
         - keyVaultObjectName: AZURE_TENANT_ID
           secretName: AZURE_TENANT_ID
