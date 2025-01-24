@@ -228,9 +228,11 @@ appconfig: |-
     apiVersion: 3
 
   jiracustom:
-    jiraUserEmail: ${JIRA_USER_EMAIL}
-    jiraAccessKey: ${JIRA_ACCESS_KEY}
-    jiraBaseUrl: ${JIRA_BASE_URL}
+    jiraUserEmail: syam.sankar2@cognizant.com
+    jiraAccessKey: ATATT3xFfGF0vd6jeIfXSzXo5FS7NonaKKjmZsnQCvQ6I_XMUCNIqFIM1ULOFOYKss2zG5Y-AjGu9hBVHDLwskR8_qm33K66Z6zAzSKiuyYcel7j4dkBJNzcftLi6uQ2z0YMNWd74z36lkOkMRS3QMGizuYD9qFAON_4zXNqr9uVJhCrry-jHz4=12E0734D
+    jiraBaseUrl: https://cognizantproducts.atlassian.net/rest/api/3/
+    jiraStoryPointsField: "Story Points"
+    jiraAssignedToMeFilter: true
 
   ###############################################< Added For JIRA END>#########################################################
   ##############################################< Added For Sonarqube Start >#########################################################
