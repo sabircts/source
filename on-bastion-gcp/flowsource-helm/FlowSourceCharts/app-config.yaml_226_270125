@@ -1,0 +1,328 @@
+appconfig: |-
+  app:
+    title: Cognizant Flowsource
+    baseUrl: ${FLOWSOURCE_BASE_URL}
+
+  organization:
+    name: " "
+
+  backend:
+    # Used for enabling authentication, secret is shared by all backend plugins
+    # See https://backstage.io/docs/auth/service-to-service-auth for
+    # information on the format
+    auth:
+      keys:
+        - secret: ${BACKEND_SECRET}
+    baseUrl: ${FLOWSOURCE_BASE_URL}
+    listen:
+      port: 7007
+      # Uncomment the following host directive to bind to specific interfaces
+      # host: 127.0.0.1
+    csp:
+      upgrade-insecure-requests: false
+      connect-src: ["'self'", 'http:', 'https:']
+      # frame-src:
+
+      # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
+      # Default Helmet Content-Security-Policy values can be removed by setting the key to false
+      img-src:
+        # "'self'" and 'data' are from the backstage default but must be set since img-src is overriden
+        - "'self'"
+        - 'data:'
+        # Allow your Jira instance for @roadiehq/backstage-plugin-jira
+        - ${JIRA_TARGET}
+    cors:
+      origin: ${FLOWSOURCE_BASE_URL}
+      methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
+      credentials: true
+
+    # config options: https://node-postgres.com/api/client
+    database:
+      client: pg
+      connection:
+        host: ${POSTGRES_SERVICE_HOST_FLOWSOURCE_ADB}
+        port: ${POSTGRES_SERVICE_PORT_FLOWSOURCE_ADB}
+        user: ${POSTGRES_USER_FLOWSOURCE_ADB}
+        password: ${POSTGRES_PASSWORD_FLOWSOURCE_ADB}
+        ssl:
+          require: true
+          rejectUnauthorized: true
+          servername: unused
+          ca:      
+            $file: /app/configurations/alloydb-ca.crt
+
+  integrations:
+    github:
+      - host: github.com
+        # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
+        # about setting up the GitHub integration here: https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration
+        token: ${GITHUB_TOKEN}
+      ### Example for how to add your GitHub Enterprise instance using the API:
+      # - host: ghe.example.net
+      #   apiBaseUrl: https://ghe.example.net/api/v3
+      #   token: ${GHE_TOKEN}
+
+    azure:
+      - host: dev.azure.com
+        credentials:
+          - organizations:
+              - ${AZURE_DEVOPS_ORGANIZATION}
+            personalAccessToken: ${AZURE_DEVOPS_TOKEN}
+    
+    google:
+      - type: ${GOOGLE_TYPE}
+        project_id: ${GOOGLE_PROJECT_ID}
+        private_key_id: ${GOOGLE_PRIVATE_KEY_ID}
+        private_key: ${GOOGLE_PRIVATE_KEY}
+        client_email: ${GOOGLE_CLIENT_EMAIL}
+        client_id: ${GOOGLE_CLIENT_ID}
+        auth_uri: ${GOOGLE_AUTH_URI}
+        token_uri: ${GOOGLE_TOKEN_URI}
+        auth_provider_x509_cert_url: ${GOOGLE_AUTH_PROVIDER_X509_CERT_URL}
+        client_x509_cert_url: ${GOOGLE_CLIENT_X509_CERT_URL}
+        universe_domain: ${GOOGLE_UNIVERSE_DOMAIN}
+        gitToken: ${GIT_TOKEN}
+        github: ${GITHUB_ENABLED}
+
+  #proxy:
+  ### Example for how to add a proxy endpoint for the frontend.
+  ### A typical reason to do this is to handle HTTPS and CORS for internal services.
+  # endpoints:
+  #   '/test':
+  #     target: 'https://example.com'
+  #     changeOrigin: true
+
+  # Reference documentation http://backstage.io/docs/features/techdocs/configuration
+  # Note: After experimenting with basic setup, use CI/CD to generate docs
+  # and an external cloud storage when deploying TechDocs for production use-case.
+  # https://backstage.io/docs/features/techdocs/how-to-guides#how-to-migrate-from-techdocs-basic-to-recommended-deployment-approach
+  techdocs:
+    builder: 'local' # Alternatives - 'external'
+    generator:
+      runIn: 'local' # Alternatives - 'docker'
+    publisher:
+      # techdocs.publisher.type can be - 'local' or 'googleGcs' or 'awsS3' or 'azureBlobStorage'.
+      # When set to 'local', techdocs-backend will create a 'static' directory at its root to store generated documentation files.
+      # When set to 'googleGcs', techdocs-backend will use a Google Cloud Storage Bucket to store generated documentation files.
+      # When set to 'awsS3', techdocs-backend will use an Amazon Web Service (AWS) S3 bucket to store generated documentation files.
+      type: 'googleGcs'
+      googleGcs:
+        bucketName: 'flowsource-techdocs-backend'
+        credentials: ${GOOGLE_APPLICATION_CREDENTIALS}
+  dora:
+    insights:
+      database: DUMMY
+      clusterIdentifier: DUMMY
+      workgroupName: DUMMY
+      secretArn: DUMMY
+      schema: DUMMY
+      dbUser: DUMMY
+      region: DUMMY
+      accessKeyId: DUMMY
+      secretAccessKey: DUMMY
+      url: DUMMY
+      api_key: DUMMY
+
+  cloudability:
+    token: ${CLOUDABILITY_TOKEN}
+    baseUrl: ${CLOUDABILITY_BASE_URL}
+
+  well-architected:
+    aws:
+      access_key_id: ${WELL_ARCHITECTED_AWS_ACCESS_KEY}
+      secret_access_key: ${WELL_ARCHITECTED_AWS_SECRET_KEY}
+
+  devops-guru:
+    statusFilter:
+      startTimeRange:
+        fromTime: ${DEVOPS_GURU_FILTER_FROM_TIME}
+    aws:
+      access_key_id: ${DEVOPS_GURU_AWS_ACCESS_KEY_ID}
+      secret_access_key: ${DEVOPS_GURU_AWS_SECRET_ACCESS_KEY}
+
+  auth:
+    # see https://backstage.io/docs/auth/ to learn about auth providers
+    environment: development
+    providers:
+      github:
+        development:
+          clientId: ${AUTH_GITHUB_CLIENT_ID}
+          clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+          githubOrganization: ${AUTH_GITHUB_ORGANIZATION}
+      gcp-iap:
+        audience: ${GCP_IAP_AUDIENCE}
+        signIn:
+          resolvers:
+            - resolver: emailMatchingUserEntityProfileEmail
+            - resolver: emailLocalPartMatchingUserEntityName
+            - resolver: emailMatchingUserEntityAnnotation
+    autologout:
+      enabled: true
+      idleTimeoutMinutes: ${AUTH_IDLE_TIMEOUTMINUTES}
+      promptBeforeIdleSeconds: ${AUTH_PROMPT_BEFORE_IDLESECONDS}
+      logoutIfDisconnected: true
+      useWorkerTimers: false
+
+  scaffolder:
+    # see https://backstage.io/docs/features/software-templates/configuration for software template options
+
+  catalog:
+    import:
+      entityFilename: catalog-info.yaml
+      pullRequestBranchName: backstage-integration
+    rules:
+    - allow: [Component, System, API, Resource, Location]
+    # See https://backstage.io/docs/features/software-catalog/#adding-components-to-the-catalog for more details
+    # on how to get entities into the catalog.
+    locations:
+
+      # Local example data, file locations are relative to the backend process, typically `packages/backend`
+    - type: file
+      target: ../../examples/entities.yaml
+
+      # Local example template
+    - type: file
+      target: ../../examples/template/template.yaml
+      rules:
+      - allow: [Template]
+
+    # Local example organizational data
+    - type: file
+      target: ../../examples/org.yaml
+      rules:
+      - allow: [User, Group]
+
+    ## Uncomment these lines to add more example data
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
+
+    # # Uncomment these lines to add an example org
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
+    #   rules:
+    #     - allow: [User, Group]
+
+    - type: file
+      target: /app/configurations/all-configurations.yaml
+      rules:
+      - allow: [User, Group, Template]
+
+  ###############################################<BEGIN Added For JIRA>#########################################################
+  proxy:
+    '/jira/api':
+      target: ${JIRA_TARGET}
+      headers:
+        Authorization: ${JIRA_TOKEN}
+        Accept: 'application/json'
+        Content-Type: 'application/json'
+        X-Atlassian-Token: 'no-check'
+      # This is a workaround since Jira APIs reject browser origin requests. Any dummy string without whitespace works.
+        User-Agent: "AnyRandomString"
+
+  jira:
+    # Defaults to /jira/api and can be omitted if proxy is configured for that url
+    proxyPath: /jira/api
+    # Add it in case your JIRA instance is connected to Confluence, in order to filter those activities
+    confluenceActivityFilter: wiki@uuid
+    # Defaults to latest and can be omitted if you want to use the latest version of the api
+    apiVersion: 3
+
+  jiracustom:
+    jiraUserEmail: syam.sankar2@cognizant.com
+    jiraAccessKey: ATATT3xFfGF0vd6jeIfXSzXo5FS7NonaKKjmZsnQCvQ6I_XMUCNIqFIM1ULOFOYKss2zG5Y-AjGu9hBVHDLwskR8_qm33K66Z6zAzSKiuyYcel7j4dkBJNzcftLi6uQ2z0YMNWd74z36lkOkMRS3QMGizuYD9qFAON_4zXNqr9uVJhCrry-jHz4=12E0734D
+    jiraBaseUrl: https://cognizantproducts.atlassian.net/rest/api/3/
+    jiraStoryPointsField: "Story Points"
+    jiraAssignedToMeFilter: true
+
+  ###############################################< Added For JIRA END>#########################################################
+  ##############################################< Added For Sonarqube Start >#########################################################
+  sonarqube:
+    baseUrl: ${SONARQUBE_URL}
+    apiKey: ${SONARQUBE_TOKEN}
+
+  ##############################################< Added For Sonarqube End >#########################################################
+  ##############################################<BEGIN Added For AzureDevOps>#########################################################
+  azureDevOps:
+    baseUrl: ${AZURE_DEVOPS_BASEURL}
+    token: ${AZURE_DEVOPS_TOKEN}
+    organization: ${AZURE_DEVOPS_ORGANIZATION}
+
+  ###############################################< Added For AzureDevOps END>#########################################################
+  ###############################################< Added For CHECKMARX START>#########################################################
+  checkmarx:
+    clientId: ${CHECKMARX_CLIENT_ID}
+    clientSecret: ${CHECKMARX_CLIENT_SECRET}
+    username: ${CHECKMARX_USERNAME}
+    password: ${CHECKMARX_PASSWORD}
+    grantType: ${CHECKMARX_GRANT_TYPE}
+    baseUrl: ${CHECKMARX_BASE_URL}
+    baseAuthUrl: ${CHECKMARX_AUTH_URL}
+
+  ###############################################< Added For CHECKMARX END>#########################################################
+  ###############################################< Added For PRISMA CLOUD START ######################################################
+  prisma-cloud:
+    api_host: ${PRISMA_API_URL}
+    access_key: ${PRISMA_ACCESS_ID}
+    secret_access_key: ${PRISMA_ACCESS_KEY}
+    token_ttl: '30'
+    max_row_fetch: '500'
+
+  ###############################################< Added For PRISMA CLOUD END ########################################################
+  ###############################################< Added For CHATBOT START ######################################################
+  chatbot:
+    url: ${CHATBOT_URL}
+    enabled: ${CHATBOT_ENABLED}
+    accessToken: ${CHATBOT_TOKEN}
+
+  ###############################################< Added For CHATBOT END ########################################################  
+  ###############################################< Added For JENKINS START>#######################################################
+  jenkins:
+    baseUrl: ${JENKINS_BASE_URL}
+    username: ${JENKINS_USERNAME}
+    apiKey: ${JENKINS_API_KEY}
+
+  ###############################################< Added For JENKINS END>#########################################################
+  ###############################################< Added For DATADOG START ######################################################
+  datadog:
+    api_key: ${DATADOG_API_KEY}
+    app_key: ${DATADOG_APP_KEY}
+    url: ${DATADOG_SITE}
+    max_row_fetch: 1000
+    api_version: v2
+    duration: 4
+
+  ###############################################< Added For DATADOG END ########################################################
+  ##############################################< Added For GitHub START>#########################################################
+  githubActions:
+    baseUrl: ${CICD_GITHUB_ACTIONS_BASEURL}
+    token: ${CICD_GITHUB_ACTIONS_TOKEN}
+  ############################################## Added For GitHub>#########################################################
+
+  kubernetes:
+    serviceLocatorMethod:
+      type: "multiTenant"
+    clusterLocatorMethods:
+      - type: "config"
+        clusters:
+          - name: ${DEV_GKE_CLUSTER_NAME}
+            url: ${DEV_GKE_CLUSTER_ENDPOINT}
+            projectId: ${GOOGLE_PROJECT_ID}
+            authProvider: "googleServiceAccount"
+
+  ################################################< Added For MORPHEUS START ######################################################
+
+  morpheus:
+    morpheus_user: ${MORPHEUS_USERNAME}
+    morpheus_password: ${MORPHEUS_PASSWORD}
+    host_url: ${MORPHEUS_HOST_URL}
+    client_id: ${MORPHEUS_CLIENT_ID}
+    grant_type: ${GRANT_TYPE}
+    scope: ${SCOPE}
+    user_id: ${FLOWSOURCE_USER_ID}                                # till authendicated user available this value will be used.
+    rejectUnauthorized: ${MORPHEUS_REJ_UN_AUTH}                   # A flag to enable/disable TLS, while communicating with Morpheus Server over HTTPS.
+    order_submission_enabled: ${MORPHEUS_ORDER_SUBMISSION_ENABLED} #default value will be false
+    field_data_len: ${MORPHEUS_INPUT_FIELD_DATA_LEN}                # default will be 250 chars
+
+  ###############################################< Added For DATADOG END ########################################################
+  dashboard:
+    baseUrl: url
