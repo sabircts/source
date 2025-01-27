@@ -17,7 +17,7 @@ appconfig: |-
     # information on the format
     auth:
       keys:
-        - secret: ${BACKEND_SECRET}
+        - secret: UfR8Ilbx9W6rtXxn4d2suisVkW5bzd6/
       # externalAccess:
       #   - type: static
       #     options:
