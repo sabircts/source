@@ -2,9 +2,10 @@ appconfig: |-
   app:
     title: Cognizant Flowsource
     baseUrl: http://10.10.0.2
+    signInAuthProvider: "github" # For specific ProxiedSignInPage use
 
   organization:
-    name: " "
+    name: "Flowsource"
 
   backend:
     # Used for enabling authentication, secret is shared by all backend plugins
