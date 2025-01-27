@@ -1,7 +1,7 @@
 appconfig: |-
   app:
   title: Cognizant Flowsource
-  baseUrl: http://localhost:3000
+  baseUrl: http://10.10.0.2
   # To include appropriate sign in page (For having logic in App.tsx)
   signInAuthProvider: "github" # For specific ProxiedSignInPage use
 
@@ -25,7 +25,7 @@ appconfig: |-
       #       subject: roleMapping-access
       #     accessRestrictions:
       #       - plugin: flowsource-core
-    baseUrl: http://localhost:7007
+    baseUrl: http://10.10.0.2
     listen:
       port: 7007
       # Uncomment the following host directive to bind to specific interfaces
