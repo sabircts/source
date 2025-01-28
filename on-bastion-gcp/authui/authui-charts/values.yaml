@@ -3,6 +3,11 @@ global:
   namespace: flowsource
   configMapName: gcip-iap-authui-configmap
 
+authui:
+  service:
+    type: LoadBalancer
+    port: 80
+
   authuiConfig:
     DISPLAY_MODE: "optionFirst"
     SELECT_TENANT_UI_TITLE: "Flowsource Auth UI"
@@ -40,3 +45,8 @@ global:
           secretName: AUTH_DOMAIN
         - keyVaultObjectName: AZURE_TENANT_ID
           secretName: AZURE_TENANT_ID
+      
+    secrets:
+#      AUTH_DOMAIN: ""
+#      AUTHUI_FIREBASE_API_KEY: ""
+#      AZURE_TENANT_ID: ""
