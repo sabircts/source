@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gcip-iap-authui-configmap
+  namespace: {{ .Values.global.namespace }}
+
+data:
+  UI_CONFIG: |
+    {
+      "{{ .Values.global.authuiSecrets.gcp.secretObjects | first | get "secretName" }}": {
+        "authDomain": "{{ .Values.global.authuiConfig.AUTH_DOMAIN }}",
+        "displayMode": "{{ .Values.global.authuiConfig.DISPLAY_MODE }}",
+        "selectTenantUiTitle": "{{ .Values.global.authuiConfig.SELECT_TENANT_UI_TITLE }}",
+        "selectTenantUiLogo": "{{ .Values.global.authuiConfig.LOGO }}",
+        "styleUrl": "{{ .Values.global.authuiConfig.STYLE_URL }}",
+        "tenants": {
+          "_": {
+            "displayName": "{{ .Values.global.authuiConfig.TENANTS_DISPLAY_NAME }}",
+            "iconUrl": "{{ .Values.global.authuiConfig.TENANTS_ICON_URL }}",
+            "logoUrl": "{{ .Values.global.authuiConfig.TENANTS_LOGO_URL }}",
+            "buttonColor": "{{ .Values.global.authuiConfig.TENANTS_BUTTON_COLOR }}",
+            "immediateFederatedRedirect": {{ .Values.global.authuiConfig.TENANTS_IMMEDIATE_FEDERATED_REDIRECT }},
+            "signInFlow": "{{ .Values.global.authuiConfig.TENANTS_SIGN_IN_FLOW }}",
+            "signInOptions": [
+              {
+                "provider": "{{ .Values.global.authuiConfig.TENANTS_SIGN_IN_OPTIONS_PROVIDER }}",
+                "customParameters": {
+                  "tenant": "{{ .Values.global.authuiSecrets.gcp.secretObjects | second | get "secretName" }}"
+                }
+              }
+            ]
+          }
+        }
+      }
+    } 

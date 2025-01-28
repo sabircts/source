@@ -69,7 +69,7 @@ flowsource:
     GOOGLE_AUTH_PROVIDER_X509_CERT_URL: "https://www.googleapis.com/oauth2/v1/certs"
     GOOGLE_CLIENT_X509_CERT_URL: "https://www.googleapis.com/robot/v1/metadata/x509/flowsource-cicd-auth-sa%40cog01hw54jphxttr4754mef052r0r.iam.gserviceaccount.com"
     GOOGLE_UNIVERSE_DOMAIN: "googleapis.com"
-    DEV_GKE_CLUSTER_NAME: "alm-flowsource-gke-cluster"
+    DEV_GKE_CLUSTER_NAME: "fstest-gke-cluster"
     DEV_GKE_CLUSTER_ENDPOINT: "172.16.0.34"
     INSIGHTS_URL: "http://34.227.203.36:8000"
     JENKINS_BASE_URL: https://jenkins.cloudsprint.io
