@@ -9,6 +9,7 @@ authui:
     port: 80
 
   authuiConfig:
+    AUTH_DOMAIN: "auth.dev.gcp.flowsource.cognizantproducts.com"
     DISPLAY_MODE: "optionFirst"
     SELECT_TENANT_UI_TITLE: "Flowsource Auth UI"
     LOGO: ""
