@@ -24,7 +24,7 @@ authui:
 
   authuiSecrets:
     # true if using external vault like AWS Secrets Manager, Azure Key Vault or Google Secret Manager
-    useSecretProvider: true
+    useSecretProvider: false
     secretproviderDetails:
       provider: gcp # for azure specify aks. for aws specify aws. for gcp specify gcp
       # based on the provider specify the appropriate values in either aws, azure or gcp blocks

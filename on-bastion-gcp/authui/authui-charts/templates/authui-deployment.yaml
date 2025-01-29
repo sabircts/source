@@ -2,11 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authui-deployment
-  namespace: {{ .Values.global.namespace }}
-  labels:
-    app: authui
+  namespace: flowsource
 spec:
-  replicas: {{ .Values.global.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       app: authui
@@ -15,52 +13,16 @@ spec:
       labels:
         app: authui
     spec:
-      serviceAccountName: default # Use default service account
       containers:
       - name: authui
         image: gcr.io/gcip-iap/authui:latest
-        imagePullPolicy: Always
         ports:
         - containerPort: 8080
-        env:
-          - name: DEBUG_CONSOLE
-            value: "true"
-        envFrom:
-          - configMapRef:
-              name: gcip-iap-authui-configmap
         volumeMounts:
-          {{- if .Values.authui.authuiSecrets.useSecretProvider }}
-          - name: authui-secrets-volume
-            mountPath: /mnt/authui-secrets
-            readOnly: true
-          {{- end }}
-        resources:
-          limits:
-            cpu: 100m
-            memory: 256Mi
-          requests:
-            cpu: 50m
-            memory: 128Mi
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
+        - name: authui-secrets-volume
+          mountPath: /mnt/authui-secrets
+          readOnly: true
       volumes:
-          {{- if .Values.authui.authuiSecrets.useSecretProvider }}
-          - name: authui-secrets-volume
-            csi:
-              driver: secrets-store.csi.k8s.io
-              readOnly: true
-              volumeAttributes:
-                secretProviderClass: authui-secrets-provider
-                name: authui-secrets
-          {{- end }}
-      restartPolicy: Always
+      - name: authui-secrets-volume
+        secret:
+          secretName: authui-secrets
