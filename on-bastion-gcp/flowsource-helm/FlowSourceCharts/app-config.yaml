@@ -1,7 +1,7 @@
 appconfig: |-
   app:
     title: Cognizant Flowsource
-    baseUrl: http://dev.gcp.flowsource.cognizantproducts.com
+    baseUrl: https://dev.gcp.flowsource.cognizantproducts.com
     signInAuthProvider: "github" # For specific ProxiedSignInPage use
 
   organization:
@@ -14,7 +14,7 @@ appconfig: |-
     auth:
       keys:
         - secret: ${BACKEND_SECRET}
-    baseUrl: http://dev.gcp.flowsource.cognizantproducts.com
+    baseUrl: https://dev.gcp.flowsource.cognizantproducts.com
     listen:
       port: 7007
       # Uncomment the following host directive to bind to specific interfaces
