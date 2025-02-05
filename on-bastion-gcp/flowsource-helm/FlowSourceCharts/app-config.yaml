@@ -95,9 +95,9 @@ appconfig: |-
     providers:
       github:
         development:
-          clientId: ${FSTEST_AUTH_GITHUB_CLIENT_ID}
-          clientSecret: ${FSTEST_AUTH_GITHUB_CLIENT_SECRET}
-          githubOrganization: ${FSTEST_AUTH_GITHUB_ORGANIZATION}
+          clientId: Ov23liQ2aR9PFqMBsDQv
+          clientSecret: e7b9132bcc4cccc84a1f21f85f1e86176e06bb7a
+          githubOrganization: CognizantCodeHub
       gcp-iap:
         audience: ${GCP_IAP_AUDIENCE}
         signIn:
