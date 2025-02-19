@@ -27,7 +27,12 @@ flowsource:
     type: ClusterIP
   useInternalPostgres: false
   ingress:
-    useIngress: false
+    useIngress: true
+    ingressClass: "gce-internal"
+    annotations: |
+      kubernetes.io/ingress.class: "gce-internal"
+      kubernetes.io/ingress.allow-http: "true"
+      kubernetes.io/ingress.global-static-ip-name: "fstest-isp-flowsource-app"
 
   flowsourceDeploy:
     serviceAccount: 
