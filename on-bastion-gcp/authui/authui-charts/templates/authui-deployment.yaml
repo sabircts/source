@@ -14,15 +14,55 @@ spec:
         app: authui
     spec:
       containers:
-      - name: authui
-        image: gcr.io/gcip-iap/authui:latest
+      - image: gcr.io/gcip-iap/authui
+        imagePullPolicy: Always
+        name: authui
+        env:
+        - name: DEBUG_CONSOLE
+          value: "true"
+        - name: UI_CONFIG
+          value: |
+            {
+              "$(API_KEY)": {
+                "authDomain": "cog01hy0xaqm3kfh4mr4t3em9ex2m.firebaseapp.com",
+                "displayMode": "optionFirst",
+                "selectTenantUiTitle": "Flowsource Auth UI",
+                "selectTenantUiLogo": "",
+                "styleUrl": "",
+                "tenants": {
+                  "_": {
+                    "displayName": "Flowsource Auth UI",
+                    "iconUrl": "https://www.gstatic.com/firebasejs/ui/2.0.0/imagesauth/anonymous.png",
+                    "logoUrl": "",
+                    "buttonColor": "#007bff",
+                    "immediateFederatedRedirect": true,
+                    "signInFlow": "redirect",
+                    "signInOptions": [
+                      {
+                        "provider": "microsoft.com",
+                        "customParameters": {
+                          "tenant": "$(TENANT_ID)"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }          
+        envFrom:
+          - secretRef:
+              name: gcip-iap-authui-secret
+        volumeMounts:
+          - name: authui-secrets-volume
+            mountPath: /mnt/authui-secrets-store
+            readOnly: true
         ports:
         - containerPort: 8080
-        volumeMounts:
-        - name: authui-secrets-volume
-          mountPath: /mnt/authui-secrets
-          readOnly: true
       volumes:
-      - name: authui-secrets-volume
-        secret:
-          secretName: authui-secrets
+          - name: authui-secrets-volume
+            csi:
+              driver: secrets-store.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: authui-secrets-provider
+                name: authui-secrets
