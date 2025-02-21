@@ -8,9 +8,8 @@ metadata:
 spec:
   type: ClusterIP  
   ports:
-  - name: http
-    port: 32098
-    targetPort: http
+  - port: 32098
     protocol: TCP
+    targetPort: http
   selector:
     app: authui
