@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: authui-service-np
   namespace: flowsource
-  annotations: |
+  annotations:
       cloud.google.com/neg: '{"exposed_ports": {"32098":{"name": "flowsource-authui-neg"}}}'
 spec:
   type: ClusterIP  
