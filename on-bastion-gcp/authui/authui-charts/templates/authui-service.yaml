@@ -8,8 +8,9 @@ spec:
   annotations: |
       cloud.google.com/neg: '{"exposed_ports": {"32098":{"name": "flowsource-authui-neg"}}}'
   ports:
-  - port: 32098
+  - name: http
+    port: 32098
+    targetPort: http
     protocol: TCP
-    targetPort: 8080
   selector:
     app: authui
