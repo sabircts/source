@@ -6,7 +6,7 @@ metadata:
   annotations:
       cloud.google.com/neg: '{"exposed_ports": {"32098":{"name": "flowsource-neg"}}}'
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - port: 80
     protocol: TCP
