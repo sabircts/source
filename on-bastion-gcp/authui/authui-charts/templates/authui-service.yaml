@@ -4,11 +4,13 @@ metadata:
   name: authui-service-np
   namespace: flowsource
   annotations:
-      cloud.google.com/neg: '{"exposed_ports": {"32098":{"name": "flowsource-authui-neg"}}}'
+      cloud.google.com/neg: '{"exposed_ports": {"32098":{"name": "flowsource-neg"}}}'
 spec:
-  type: ClusterIP  
+  type: NodePort
   ports:
-  - port: 32098
+  - port: 80
     protocol: TCP
+    targetPort: 8080
+    nodePort: 32098
   selector:
     app: authui
