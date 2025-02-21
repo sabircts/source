@@ -24,9 +24,7 @@ global:
 
 flowsource:
   service:
-    type: ClusterIP
-    annotations: |
-      
+    type: ClusterIP    
   useInternalPostgres: false
   ingress:
     useIngress: false
