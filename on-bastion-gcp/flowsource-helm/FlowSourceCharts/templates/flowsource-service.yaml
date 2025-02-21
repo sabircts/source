@@ -5,7 +5,7 @@ metadata:
   name: flowsource
   namespace: {{ .Values.global.namespace }}
   annotations:
-    cloud.google.com/neg: '{"exposed_ports": {"7007":{{{ .Values.flowsource.service.annotations }}}}}'
+    {{ .Values.flowsource.service.annotations }}
 spec:
   type: {{ .Values.flowsource.service.type }}
   selector:

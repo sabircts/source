@@ -25,7 +25,8 @@ global:
 flowsource:
   service:
     type: ClusterIP
-    annotations:
+    annotations: |
+      cloud.google.com/neg: '{"exposed_ports": {"7007":{"name": "flowsource-neg"}}}'
   useInternalPostgres: false
   ingress:
     useIngress: false
