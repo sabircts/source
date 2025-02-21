@@ -10,6 +10,5 @@ spec:
   ports:
   - port: 32098
     protocol: TCP
-    targetPort: 32098
   selector:
     app: authui
