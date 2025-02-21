@@ -4,7 +4,7 @@ metadata:
   name: authui-service-np
   namespace: flowsource
   annotations:
-      cloud.google.com/neg: '{"exposed_ports": {"80":{"name": "flowsource-neg"}}}'
+      cloud.google.com/neg: '{"exposed_ports": {"80":{}}}'
 spec:
   type: ClusterIP
   ports:
