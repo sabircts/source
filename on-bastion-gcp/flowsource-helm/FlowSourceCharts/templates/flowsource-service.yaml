@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: flowsource
   namespace: {{ .Values.global.namespace }}
+  annotations:
+    cloud.google.com/neg: '{"exposed_ports": {"7007":{"name": "flowsource-neg"}}}'
 spec:
   type: {{ .Values.flowsource.service.type }}
   selector:
