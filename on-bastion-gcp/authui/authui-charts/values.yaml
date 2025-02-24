@@ -1,53 +1,10 @@
 global:
   replicaCount: 1
   namespace: flowsource
-  configMapName: gcip-iap-authui-configmap
+  #configMapName: gcip-iap-authui-configmap
 
 authui:
   service:
-    type: LoadBalancer
-    port: 80
-
-  authuiConfig:
-    AUTH_DOMAIN: "cog01hy0xaqm3kfh4mr4t3em9ex2m.firebaseapp.com"
-    DISPLAY_MODE: "optionFirst"
-    SELECT_TENANT_UI_TITLE: "Flowsource Auth UI"
-    LOGO: ""
-    STYLE_URL: ""
-    TENANTS_DISPLAY_NAME: "Flowsource Auth UI"
-    TENANTS_ICON_URL: "https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/anonymous.png"
-    TENANTS_LOGO_URL: ""
-    TENANTS_BUTTON_COLOR: "#007bff"
-    TENANTS_IMMEDIATE_FEDERATED_REDIRECT: true
-    TENANTS_SIGN_IN_FLOW: "redirect"
-    TENANTS_SIGN_IN_OPTIONS_PROVIDER: "microsoft.com"
-
-  authuiSecrets:
-    # true if using external vault like AWS Secrets Manager, Azure Key Vault or Google Secret Manager
-    useSecretProvider: false
-    secretproviderDetails:
-      provider: gcp # for azure specify aks. for aws specify aws. for gcp specify gcp
-      # based on the provider specify the appropriate values in either aws, azure or gcp blocks
-      ######### Provider specific configuration block #####
-#      azure:
-#        keyvaultName: AZURE VAULTNAME # Required in case of azure
-#        tenantId: AZURE TENANTID OF VAULT # Required in case of azure
-#        userManagedIdentityClientId: AZURE CLIENTID # Set the clientID of the user-assigned managed identity to use. Required in case of azure
-#      aws:
-#        region: SECRETS REGION # Required in case of aws
-#        secretARN: ARN OF SECRETS # Required in case of aws
-      gcp:
-        project: "cog01hy0xaqm3kfh4mr4t3em9ex2m" # Required in case of gcp
-      ######### End of Provider specific configuration block #####
-      secretObjects:
-        - keyVaultObjectName: AUTHUI_FIREBASE_API_KEY
-          secretName: AUTHUI_FIREBASE_API_KEY
-        - keyVaultObjectName: AUTH_DOMAIN
-          secretName: AUTH_DOMAIN
-        - keyVaultObjectName: AZURE_TENANT_ID
-          secretName: AZURE_TENANT_ID
-      
-    secrets:
-#      AUTH_DOMAIN: ""
-#      AUTHUI_FIREBASE_API_KEY: ""
-#      AZURE_TENANT_ID: ""
+    type: ClusterIP
+    annotations: |
+      cloud.google.com/neg: '{"exposed_ports": {"80":{}}}'
