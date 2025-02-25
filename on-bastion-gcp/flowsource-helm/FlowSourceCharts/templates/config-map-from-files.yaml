@@ -27,5 +27,22 @@ kind: ConfigMap
 metadata:
   name: chatbot-jsons
   namespace: {{ .Values.global.namespace }}
-data: 
+data:
 {{ ( $.Files.Glob "chatbot/*").AsConfig | indent 2 }}
+
+---
+
+{{- if .Values.cacerts }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ca-certs-yaml
+  namespace: {{ .Values.global.namespace }}
+data:
+{{- range $files := .Values.cacerts.files }}
+{{ $files.name | indent 2 -}}: |-
+{{ $files.content | indent 4 -}}
+{{ end }}
+{{ end }}
+
+---
