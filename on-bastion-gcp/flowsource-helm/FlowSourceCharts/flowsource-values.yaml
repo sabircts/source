@@ -37,6 +37,7 @@ flowsource:
       annotations: |
         iam.gke.io/gcp-service-account: gke-workload@cog01hy0xaqm3kfh4mr4t3em9ex2m.iam.gserviceaccount.com
     image: us-east1-docker.pkg.dev/cog01hy0xaqm3kfh4mr4t3em9ex2m/fstest-registry/flowsource:0.2.26-base-testing-plugins
+    imagePullPolicy: IfNotPresent
 
   flowsourceConfig:
     AUTH_GITHUB_ORGANIZATION: "CognizantStudio"
