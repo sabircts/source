@@ -23,4 +23,4 @@ global:
       annotations: |
         cloud.google.com/neg: '{"exposed_ports": {"80":{}}}'
     secret:
-      gcpProjectId: 544895355411
+      gcpProjectId: "544895355411"
