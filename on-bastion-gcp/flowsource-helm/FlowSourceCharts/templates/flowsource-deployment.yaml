@@ -17,7 +17,7 @@ spec:
         app: flowsource
     spec:
       {{- if .Values.flowsource.flowsourceDeploy.serviceAccount }}
-      serviceAccountName: {{ .Values.flowsource.flowsourceDeploy.serviceAccount.name }}
+      serviceAccountName: {{ .Values.flowsource.flowsourceDeploy.serviceAccount }}
       {{- end }}
       containers:
 
