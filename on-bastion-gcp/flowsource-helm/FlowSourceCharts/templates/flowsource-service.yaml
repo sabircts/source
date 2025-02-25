@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: flowsource
   namespace: {{ .Values.global.namespace }}
-  {{- if .Values.flowsource.ingress.annotations }}
+  {{- if .Values.flowsource.service.annotations }}
   annotations:
     {{- .Values.flowsource.service.annotations | nindent 4 }}
   {{- end }}
