@@ -4,8 +4,10 @@ kind: Service
 metadata:
   name: flowsource
   namespace: {{ .Values.global.namespace }}
+  {{- if .Values.flowsource.ingress.annotations }}
   annotations:
-    {{ .Values.flowsource.service.annotations }}
+    {{- .Values.flowsource.service.annotations | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.flowsource.service.type }}
   selector:
@@ -15,3 +17,6 @@ spec:
       port: 7007
       targetPort: http
       protocol: TCP
+      {{- if eq .Values.flowsource.service.type "NodePort" }}
+      nodePort: {{ .Values.flowsource.service.nodePort }}
+      {{- end }}

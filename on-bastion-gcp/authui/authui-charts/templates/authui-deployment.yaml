@@ -24,22 +24,22 @@ spec:
           value: |
             {
               "$(API_KEY)": {
-                "authDomain": "cog01hy0xaqm3kfh4mr4t3em9ex2m.firebaseapp.com",
-                "displayMode": "optionFirst",
-                "selectTenantUiTitle": "Flowsource Auth UI",
-                "selectTenantUiLogo": "",
-                "styleUrl": "",
+                "authDomain": "{{ .Values.global.authuiConfig.AUTH_DOMAIN }}",
+                "displayMode": "{{ .Values.global.authuiConfig.DISPLAY_MODE }}",
+                "selectTenantUiTitle": "{{ .Values.global.authuiConfig.SELECT_TENANT_UI_TITLE }}",
+                "selectTenantUiLogo": "{{ .Values.global.authuiConfig.LOGO }}",
+                "styleUrl": "{{ .Values.global.authuiConfig.STYLE_URL }}",
                 "tenants": {
                   "_": {
-                    "displayName": "Flowsource Auth UI",
-                    "iconUrl": "https://www.gstatic.com/firebasejs/ui/2.0.0/imagesauth/anonymous.png",
-                    "logoUrl": "",
-                    "buttonColor": "#007bff",
-                    "immediateFederatedRedirect": true,
-                    "signInFlow": "redirect",
+                    "displayName": "{{ .Values.global.authuiConfig.TENANTS_DISPLAY_NAME }}",
+                    "iconUrl": "{{ .Values.global.authuiConfig.TENANTS_ICON_URL }}",
+                    "logoUrl": "{{ .Values.global.authuiConfig.TENANTS_LOGO_URL }}",
+                    "buttonColor": "{{ .Values.global.authuiConfig.TENANTS_BUTTON_COLOR }}",
+                    "immediateFederatedRedirect": {{ .Values.global.authuiConfig.TENANTS_IMMEDIATE_FEDERATED_REDIRECT }},
+                    "signInFlow": "{{ .Values.global.authuiConfig.TENANTS_SIGN_IN_FLOW }}",
                     "signInOptions": [
                       {
-                        "provider": "microsoft.com",
+                        "provider": "{{ .Values.global.authuiConfig.TENANTS_SIGN_IN_OPTIONS_PROVIDER }}",
                         "customParameters": {
                           "tenant": "$(TENANT_ID)"
                         }
