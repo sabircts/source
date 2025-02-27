@@ -40,7 +40,7 @@ flowsource:
     imagePullPolicy: IfNotPresent
 
   flowsourceConfig:
-    AUTH_GITHUB_ORGANIZATION: "CognizantStudio"
+    FSTEST_AUTH_GITHUB_ORGANIZATION: "CognizantCodeHub"
     AUTH_IDLE_TIMEOUTMINUTES: 30
     AUTH_PROMPT_BEFORE_IDLESECONDS: 25
     AZURE_DEVOPS_BASEURL: http://dev.azure.com
@@ -110,10 +110,10 @@ flowsource:
         project: "cog01hy0xaqm3kfh4mr4t3em9ex2m" # Required in case of gcp
       ######### End of Provider specific configuration block #####
       secretObjects:
-        - keyVaultObjectName: AUTH_GITHUB_CLIENT_ID
-          secretName: AUTH_GITHUB_CLIENT_ID
-        - keyVaultObjectName: AUTH_GITHUB_CLIENT_SECRET
-          secretName: AUTH_GITHUB_CLIENT_SECRET
+        - keyVaultObjectName: FSTEST_AUTH_GITHUB_CLIENT_ID
+          secretName: FSTEST_AUTH_GITHUB_CLIENT_ID
+        - keyVaultObjectName: FSTEST_AUTH_GITHUB_CLIENT_SECRET
+          secretName: FSTEST_AUTH_GITHUB_CLIENT_SECRET
         - keyVaultObjectName: AZURE_DEVOPS_TOKEN
           secretName: AZURE_DEVOPS_TOKEN
         - keyVaultObjectName: BACKEND_SECRET
