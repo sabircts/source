@@ -1,6 +1,6 @@
 appconfig: |-
   app:
-    title: Cognizant Flowsource
+    title: Cognizant- Flowsource
     baseUrl: ${FLOWSOURCE_BASE_URL}
     signInAuthProvider: "github" # For specific ProxiedSignInPage use
 
