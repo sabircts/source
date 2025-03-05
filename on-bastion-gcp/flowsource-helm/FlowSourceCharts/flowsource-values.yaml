@@ -53,8 +53,6 @@ flowsource:
     GOOGLE_UNIVERSE_DOMAIN: "googleapis.com"
     DEV_GKE_CLUSTER_NAME: "fstest-gke-cluster"
     DEV_GKE_CLUSTER_ENDPOINT: "172.16.0.34"
-#    TECHDOCS_STORAGE_PROVIDER_TYPE:
-#    TECHDOCS_STORAGE_CONTAINER_NAME:
 
   flowsourceSecrets:
     # true if using external vault like AWS Secrets Manager or Azure Key Vault
