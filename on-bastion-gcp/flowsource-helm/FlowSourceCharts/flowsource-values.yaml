@@ -41,7 +41,7 @@ flowsource:
 
   flowsourceConfig:
     AUTH_IDLE_TIMEOUTMINUTES: 30
-    AUTH_PROMPT_BEFORE_IDLESECONDS: 25    
+    AUTH_PROMPT_BEFORE_IDLESECONDS: 30    
     GCP_IAP_AUDIENCE: "/projects/544895355411/us-east1/backendServices/6663790557691736207"
     GOOGLE_TYPE: "service_account"
     GOOGLE_PROJECT_ID: "cog01hy0xaqm3kfh4mr4t3em9ex2m"
