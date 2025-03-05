@@ -152,20 +152,20 @@ flowsource:
           secretName: JIRA_ACCESS_KEY
         - keyVaultObjectName: JIRA_BASE_URL
           secretName: JIRA_BASE_URL          
-        - keyVaultObjectName: JIRA-STORY-POINTS-FIELD
-          secretName: JIRA-STORY-POINTS-FIELD
-        - keyVaultObjectName: JIRA-ASSIGNEDTOME-FILTER
-          secretName: JIRA-ASSIGNEDTOME-FILTER
+        - keyVaultObjectName: JIRA_STORY_POINTS_FIELD
+          secretName: JIRA_STORY_POINTS_FIELD
+        - keyVaultObjectName: JIRA_ASSIGNEDTOME_FILTER
+          secretName: JIRA_ASSIGNEDTOME_FILTER
         - keyVaultObjectName: SONARQUBE_BASE_URL
           secretName: SONARQUBE_BASE_URL
         - keyVaultObjectName: SONARQUBE_API_KEY
           secretName: SONARQUBE_API_KEY
-        - keyVaultObjectName: SERVICENOW-INSTANCE-URL
-          secretName: SERVICENOW-INSTANCE-URL
-        - keyVaultObjectName: SERVICENOW-PASSWORD
-          secretName: SERVICENOW-PASSWORD
-        - keyVaultObjectName: SERVICENOW-USERNAME
-          secretName: SERVICENOW-USERNAME
+        - keyVaultObjectName: SERVICENOW_INSTANCE_URL
+          secretName: SERVICENOW_INSTANCE_URL
+        - keyVaultObjectName: SERVICENOW_PASSWORD
+          secretName: SERVICENOW_PASSWORD
+        - keyVaultObjectName: SERVICENOW_USERNAME
+          secretName: SERVICENOW_USERNAME
         - keyVaultObjectName: GITHUBACTIONS_BASE_URL
           secretName: GITHUBACTIONS_BASE_URL
         - keyVaultObjectName: POSTGRES_PASSWORD_FLOWSOURCE_ADB

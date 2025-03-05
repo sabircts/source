@@ -161,8 +161,8 @@ appconfig: |-
     jiraUserEmail: ${JIRA_USER_EMAIL}
     jiraAccessKey: ${JIRA_ACCESS_KEY}
     jiraBaseUrl: ${JIRA_BASE_URL}
-    jiraStoryPointsField: ${JIRA-STORY-POINTS-FIELD}
-    jiraAssignedToMeFilter: ${JIRA-ASSIGNEDTOME-FILTER}
+    jiraStoryPointsField: ${JIRA_STORY_POINTS_FIELD}
+    jiraAssignedToMeFilter: ${JIRA_ASSIGNEDTOME_FILTER}
 
   ###############################################< Added For JIRA END>#########################################################
   ##############################################< Added For Sonarqube Start >#########################################################
@@ -171,9 +171,9 @@ appconfig: |-
     apiKey: ${SONARQUBE_API_KEY}
   ##############################################< Added For SERVICENOW START ########################################################
   serviceNow:
-    username: ${SERVICENOW-USERNAME}
-    password: ${SERVICENOW-PASSWORD}
-    instanceUrl: ${SERVICENOW-INSTANCE-URL}
+    username: ${SERVICENOW_USERNAME}
+    password: ${SERVICENOW_PASSWORD}
+    instanceUrl: ${SERVICENOW_INSTANCE_URL}
   ###############################################< Added For SERVICENOW END ########################################################
   ##############################################<BEGIN Added For GitHub>#########################################################
   githubActions:
