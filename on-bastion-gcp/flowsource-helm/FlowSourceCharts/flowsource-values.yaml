@@ -40,19 +40,57 @@ flowsource:
     imagePullPolicy: IfNotPresent
 
   flowsourceConfig:
+    FSTEST_AUTH_GITHUB_ORGANIZATION: "CognizantCodeHub"
     AUTH_IDLE_TIMEOUTMINUTES: 30
-    AUTH_PROMPT_BEFORE_IDLESECONDS: 25    
+    AUTH_PROMPT_BEFORE_IDLESECONDS: 25
+    AZURE_DEVOPS_BASEURL: http://dev.azure.com
+    AZURE_DEVOPS_ORGANIZATION: "DUMMY"
+    CHATBOT_ENABLED: "true"
+    CHATBOT_URL: "DUMMY"
+    CHATBOT_TOKEN: "DUMMY"
+    ChatBotJsonsFolderPath: "/app/chatbot"
+    CHECKMARX_BASE_URL: https://cognizanttechnology.checkmarx.net/cxrestapi/help
+    CHECKMARX_AUTH_URL: https://cognizanttechnology.checkmarx.net/CxRestAPI/auth/identity/connect/token
+    CHECKMARX_USERNAME: "acceleratedigital_svc"
+    CICD_GITHUB_ACTIONS_BASEURL: https://api.github.com/repos/
+    CLOUDABILITY_BASE_URL: "https://api.cloudability.com/v3"
+    DATADOG_SITE: https://us3.datadoghq.com/api/v2/logs/events
+    DEVOPS_GURU_FILTER_FROM_TIME: 0
+    FLOWSOURCE_BASE_URL: "https://fs.gcp.flowsource.cognizantproducts.com/"
+    FLOWSOURCE_VERSION: 1.0
     GCP_IAP_AUDIENCE: "/projects/544895355411/us-east1/backendServices/6663790557691736207"
     GOOGLE_TYPE: "service_account"
-    GOOGLE_PROJECT_ID: "cog01hy0xaqm3kfh4mr4t3em9ex2m"
-    GOOGLE_CLIENT_EMAIL: "flowsource-cicd-auth-sa@cog01hy0xaqm3kfh4mr4t3em9ex2m.iam.gserviceaccount.com"
+    GOOGLE_PROJECT_ID: "cog01hw54jphxttr4754mef052r0r"
+    GOOGLE_CLIENT_EMAIL: "flowsource-cicd-auth-sa@cog01hw54jphxttr4754mef052r0r.iam.gserviceaccount.com"
     GOOGLE_AUTH_URI: "https://accounts.google.com/o/oauth2/auth"
     GOOGLE_TOKEN_URI: "https://oauth2.googleapis.com/token"
     GOOGLE_AUTH_PROVIDER_X509_CERT_URL: "https://www.googleapis.com/oauth2/v1/certs"
-    GOOGLE_CLIENT_X509_CERT_URL: "https://www.googleapis.com/robot/v1/metadata/x509/flowsource-cicd-auth-sa%40cog01hy0xaqm3kfh4mr4t3em9ex2m.iam.gserviceaccount.com"
+    GOOGLE_CLIENT_X509_CERT_URL: "https://www.googleapis.com/robot/v1/metadata/x509/flowsource-cicd-auth-sa%40cog01hw54jphxttr4754mef052r0r.iam.gserviceaccount.com"
     GOOGLE_UNIVERSE_DOMAIN: "googleapis.com"
     DEV_GKE_CLUSTER_NAME: "fstest-gke-cluster"
     DEV_GKE_CLUSTER_ENDPOINT: "172.16.0.34"
+    INSIGHTS_URL: "http://34.227.203.36:8000"
+    JENKINS_BASE_URL: https://jenkins.cloudsprint.io
+    JIRA_BASE_URL: "https://cdeproducts.atlassian.net/rest/api/3/"
+    JIRA_TARGET: "https://cdeproducts.atlassian.net"
+    JIRA_USER_EMAIL: "sriram.venkatakrishnan2@cognizant.com"
+    MORPHEUS_CLIENT_ID: "somevalue"
+    MORPHEUS_HOST_URL: https://ec2-54-227-175-51.compute-1.amazonaws.com
+    MORPHEUS_INPUT_FIELD_DATA_LEN: "somevalue"
+    MORPHEUS_ORDER_SUBMISSION_ENABLED: "somevalue"
+    MORPHEUS_PASSWORD: "somevalue"
+    MORPHEUS_REJ_UN_AUTH: "false"
+    MORPHEUS_USERNAME: "somevalue"
+    NODE_OPTIONS: "--no-node-snapshot"    
+    POSTGRES_SERVICE_HOST_FLOWSOURCE_ADB: "192.168.16.13"
+    POSTGRES_SERVICE_PORT_FLOWSOURCE_ADB: "5432"
+    POSTGRES_USER_FLOWSOURCE_ADB: "postgres"
+    PRISMA_API_URL: https://api2.prismacloud.io/
+    S3_BUCKET_NAME: "DUMMY"
+    S3_AWS_REGION: "DUMMY"
+    SONARQUBE_URL: http://a417c2f372c6b457788f0a244010ecca-264646901.ap-southeast-1.elb.amazonaws.com:9000    
+#    TECHDOCS_STORAGE_PROVIDER_TYPE:
+#    TECHDOCS_STORAGE_CONTAINER_NAME:
 
   flowsourceSecrets:
     # true if using external vault like AWS Secrets Manager or Azure Key Vault
@@ -72,14 +110,10 @@ flowsource:
         project: "cog01hy0xaqm3kfh4mr4t3em9ex2m" # Required in case of gcp
       ######### End of Provider specific configuration block #####
       secretObjects:
-        - keyVaultObjectName: FLOWSOURCE_BASE_URL
-          secretName: FLOWSOURCE_BASE_URL
-        - keyVaultObjectName: AUTH_GITHUB_CLIENT_ID
-          secretName: AUTH_GITHUB_CLIENT_ID
-        - keyVaultObjectName: AUTH_GITHUB_CLIENT_SECRET
-          secretName: AUTH_GITHUB_CLIENT_SECRET
-        - keyVaultObjectName: AUTH_GITHUB_ORGANIZATION
-          secretName: AUTH_GITHUB_ORGANIZATION          
+        - keyVaultObjectName: FSTEST_AUTH_GITHUB_CLIENT_ID
+          secretName: FSTEST_AUTH_GITHUB_CLIENT_ID
+        - keyVaultObjectName: FSTEST_AUTH_GITHUB_CLIENT_SECRET
+          secretName: FSTEST_AUTH_GITHUB_CLIENT_SECRET
         - keyVaultObjectName: AZURE_DEVOPS_TOKEN
           secretName: AZURE_DEVOPS_TOKEN
         - keyVaultObjectName: BACKEND_SECRET
@@ -123,9 +157,15 @@ flowsource:
         - keyVaultObjectName: JENKINS_API_KEY
           secretName: JENKINS_API_KEY
         - keyVaultObjectName: JENKINS_USERNAME
-          secretName: JENKINS_USERNAME        
+          secretName: JENKINS_USERNAME
+        - keyVaultObjectName: JIRA_ACCESS_KEY
+          secretName: JIRA_ACCESS_KEY
         - keyVaultObjectName: JIRA_TOKEN
-          secretName: JIRA_TOKEN        
+          secretName: JIRA_TOKEN
+        - keyVaultObjectName: POSTGRES_PASSWORD_FLOWSOURCE_ADB
+          secretName: POSTGRES_PASSWORD_FLOWSOURCE_ADB
+        - keyVaultObjectName: POSTGRES_USER_FLOWSOURCE_ADB
+          secretName: POSTGRES_USER_FLOWSOURCE_ADB
         - keyVaultObjectName: PRISMA_ACCESS_ID
           secretName: PRISMA_ACCESS_ID
         - keyVaultObjectName: PRISMA_ACCESS_KEY
@@ -146,36 +186,6 @@ flowsource:
           secretName: WELL_ARCHITECTED_AWS_ACCESS_KEY
         - keyVaultObjectName: WELL_ARCHITECTED_AWS_SECRET_KEY
           secretName: WELL_ARCHITECTED_AWS_SECRET_KEY
-        - keyVaultObjectName: JIRA_USER_EMAIL
-          secretName: JIRA_USER_EMAIL
-        - keyVaultObjectName: JIRA_ACCESS_KEY
-          secretName: JIRA_ACCESS_KEY
-        - keyVaultObjectName: JIRA_BASE_URL
-          secretName: JIRA_BASE_URL          
-        - keyVaultObjectName: JIRA_STORY_POINTS_FIELD
-          secretName: JIRA_STORY_POINTS_FIELD
-        - keyVaultObjectName: JIRA_ASSIGNEDTOME_FILTER
-          secretName: JIRA_ASSIGNEDTOME_FILTER
-        - keyVaultObjectName: SONARQUBE_BASE_URL
-          secretName: SONARQUBE_BASE_URL
-        - keyVaultObjectName: SONARQUBE_API_KEY
-          secretName: SONARQUBE_API_KEY
-        - keyVaultObjectName: SERVICENOW_INSTANCE_URL
-          secretName: SERVICENOW_INSTANCE_URL
-        - keyVaultObjectName: SERVICENOW_PASSWORD
-          secretName: SERVICENOW_PASSWORD
-        - keyVaultObjectName: SERVICENOW_USERNAME
-          secretName: SERVICENOW_USERNAME
-        - keyVaultObjectName: GITHUBACTIONS_BASE_URL
-          secretName: GITHUBACTIONS_BASE_URL
-        - keyVaultObjectName: POSTGRES_PASSWORD_FLOWSOURCE_ADB
-          secretName: POSTGRES_PASSWORD_FLOWSOURCE_ADB
-        - keyVaultObjectName: POSTGRES_USER_FLOWSOURCE_ADB
-          secretName: POSTGRES_USER_FLOWSOURCE_ADB
-        - keyVaultObjectName: POSTGRES_SERVICE_HOST_FLOWSOURCE_ADB
-          secretName: POSTGRES_SERVICE_HOST_FLOWSOURCE_ADB
-        - keyVaultObjectName: POSTGRES_SERVICE_PORT_FLOWSOURCE_ADB
-          secretName: POSTGRES_SERVICE_PORT_FLOWSOURCE_ADB
 
     secrets:
 #      BACKEND_SECRET: "DUMMY"
