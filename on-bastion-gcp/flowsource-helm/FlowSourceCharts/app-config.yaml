@@ -1,6 +1,6 @@
 appconfig: |-
   app:
-    title: Cognizant Flowsource
+    title: Cognizant-Flowsource
     baseUrl: ${FLOWSOURCE_BASE_URL}
     signInAuthProvider: "github" # For specific ProxiedSignInPage use
 
@@ -95,9 +95,9 @@ appconfig: |-
     providers:
       github:
         development:
-          clientId: ${FSTEST_AUTH_GITHUB_CLIENT_ID}
-          clientSecret: ${FSTEST_AUTH_GITHUB_CLIENT_SECRET}
-          githubOrganization: ${FSTEST_AUTH_GITHUB_ORGANIZATION}
+          clientId: ${AUTH_GITHUB_CLIENT_ID}
+          clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+          githubOrganization: ${AUTH_GITHUB_ORGANIZATION}
       gcp-iap:
         audience: ${GCP_IAP_AUDIENCE}
         signIn:
@@ -158,24 +158,24 @@ appconfig: |-
 
   ###############################################<BEGIN Added For JIRA>#########################################################
   jiracustom:
-    jiraUserEmail: 'syam.sankar2@cognizant.com'
-    jiraAccessKey: 'ATATT3xFfGF0vd6jeIfXSzXo5FS7NonaKKjmZsnQCvQ6I_XMUCNIqFIM1ULOFOYKss2zG5Y-AjGu9hBVHDLwskR8_qm33K66Z6zAzSKiuyYcel7j4dkBJNzcftLi6uQ2z0YMNWd74z36lkOkMRS3QMGizuYD9qFAON_4zXNqr9uVJhCrry-jHz4=12E0734D'
-    jiraBaseUrl: 'https://cognizantproducts.atlassian.net/rest/api/3/'
-    jiraStoryPointsField: 'Story Points'
-    jiraAssignedToMeFilter: true
+    jiraUserEmail: ${JIRA_USER_EMAIL}
+    jiraAccessKey: ${JIRA_ACCESS_KEY}
+    jiraBaseUrl: ${JIRA_BASE_URL}
+    jiraStoryPointsField: ${JIRA_STORY_POINTS_FIELD}
+    jiraAssignedToMeFilter: ${JIRA_ASSIGNEDTOME_FILTER}
 
   ###############################################< Added For JIRA END>#########################################################
   ##############################################< Added For Sonarqube Start >#########################################################
   sonarqube:
-    baseUrl: 'https://codeinspect.codehub.cognizantproducts.com'
-    apiKey: squ_5d0668a9e1691f1c7139ff93fb4d3d15a6ef9d74
+    baseUrl: ${SONARQUBE_BASE_URL}
+    apiKey: ${SONARQUBE_API_KEY}
   ##############################################< Added For SERVICENOW START ########################################################
   serviceNow:
-    username: '2144318'
-    password: 'NorwegianSharkOslo@123'
-    instanceUrl: 'https://cognizantopsdev.service-now.com'
+    username: ${SERVICENOW_USERNAME}
+    password: ${SERVICENOW_PASSWORD}
+    instanceUrl: ${SERVICENOW_INSTANCE_URL}
   ###############################################< Added For SERVICENOW END ########################################################
   ##############################################<BEGIN Added For GitHub>#########################################################
   githubActions:
-    baseUrl: 'https://api.github.com/repos'
+    baseUrl: ${GITHUBACTIONS_BASE_URL}
   ###############################################< Added For GitHub END>#########################################################
